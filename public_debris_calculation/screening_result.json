@@ -1,0 +1,517 @@
+{
+  "retrieved_utc": "2026-09-02T06:39:51.066055+00:00",
+  "model": {
+    "target_filter": "FENGYUN 1C DEB; RCS-equivalent diameter 8-12 cm; perigee >=700 km; apogee <=900 km; e<=0.02; GP age <=3 days",
+    "common_epoch": "2026-09-01T23:06:52.041312+00:00",
+    "element_alignment": "sgp4 2.25 propagation of published OMM mean elements to common epoch; TEME states",
+    "route": "nearest-neighbour graph exhaustive depth-5 path search",
+    "transfer": "equivalent-circular two-impulse Hohmann; full plane change combined at higher radius",
+    "timed_route": "SGP4 mutual-plane crossing search + equivalent-circular Hohmann/plane change + <=10 m/s per-burn phasing; 2 day RPO/capture/stow dwell at each target",
+    "exclusions": "No finite burns, precision ephemeris/covariance, attitude/tumble dynamics, contact dynamics, or ground-network constraints"
+  },
+  "eligible_target_count": 145,
+  "selected_targets": [
+    {
+      "norad": 31150,
+      "object_id": "1999-025BHC",
+      "name": "FENGYUN 1C DEB",
+      "epoch": "2026-09-01T12:38:10.654080",
+      "mean_motion_rev_day": 14.12872378,
+      "a_km": 7228.801246056358,
+      "e": 0.002109715348834441,
+      "inc_deg": 98.68280662599709,
+      "source_raan_deg": 250.287,
+      "raan_deg": 250.70551452185543,
+      "source_argp_deg": 131.3291,
+      "argp_deg": 109.60573169841109,
+      "source_mean_anomaly_deg": 20.8673,
+      "mean_anomaly_deg": 102.03983077789302,
+      "reference_epoch": "2026-09-01T23:06:52.041312+00:00",
+      "epoch_age_days": 0.43659013,
+      "perigee_km": 838.0,
+      "apogee_km": 861.0,
+      "period_min": 101.92003343135639,
+      "rcs_m2": 0.0075,
+      "rcs_equiv_d_cm": 9.772050238058398,
+      "state_r_teme_km": [
+        2573.379576500424,
+        5605.525101761989,
+        -3775.9529129034786
+      ],
+      "state_v_teme_kms": [
+        -0.39187319642492535,
+        -4.002596065940304,
+        -6.238371735078667
+      ]
+    },
+    {
+      "norad": 35175,
+      "object_id": "1999-025DNF",
+      "name": "FENGYUN 1C DEB",
+      "epoch": "2026-08-30T19:23:45.178656",
+      "mean_motion_rev_day": 14.21670562,
+      "a_km": 7195.861161119447,
+      "e": 0.004427090897559232,
+      "inc_deg": 98.5734832560597,
+      "source_raan_deg": 248.711,
+      "raan_deg": 250.79917769551952,
+      "source_argp_deg": 242.3312,
+      "argp_deg": 235.3956432032797,
+      "source_mean_anomaly_deg": 117.2116,
+      "mean_anomaly_deg": 346.97356491704284,
+      "reference_epoch": "2026-09-01T23:06:52.041312+00:00",
+      "epoch_age_days": 2.15494054,
+      "perigee_km": 779.0,
+      "apogee_km": 860.0,
+      "period_min": 101.28928870653509,
+      "rcs_m2": 0.0056,
+      "rcs_equiv_d_cm": 8.444016491289505,
+      "state_r_teme_km": [
+        2422.382528231488,
+        4771.964353744781,
+        -4763.950945998111
+      ],
+      "state_v_teme_kms": [
+        -0.8766495886202363,
+        -5.02286832032023,
+        -5.4658110284347226
+      ]
+    },
+    {
+      "norad": 35089,
+      "object_id": "1999-025DJR",
+      "name": "FENGYUN 1C DEB",
+      "epoch": "2026-08-31T05:46:01.989120",
+      "mean_motion_rev_day": 14.20119866,
+      "a_km": 7207.7117933244,
+      "e": 0.003398904219188717,
+      "inc_deg": 98.55271447645887,
+      "source_raan_deg": 249.4214,
+      "raan_deg": 251.09057365633637,
+      "source_argp_deg": 27.3667,
+      "argp_deg": 44.85309442840042,
+      "source_mean_anomaly_deg": 332.8986,
+      "mean_anomaly_deg": 118.11230364134659,
+      "reference_epoch": "2026-09-01T23:06:52.041312+00:00",
+      "epoch_age_days": 1.7228015300000001,
+      "perigee_km": 805.0,
+      "apogee_km": 845.0,
+      "period_min": 101.3998912680516,
+      "rcs_m2": 0.0082,
+      "rcs_equiv_d_cm": 10.217907939900583,
+      "state_r_teme_km": [
+        1949.2712228931348,
+        6641.867277101689,
+        2050.4933252870264
+      ],
+      "state_v_teme_kms": [
+        1.6976495449349593,
+        1.6950970604155382,
+        -7.026288254304669
+      ]
+    },
+    {
+      "norad": 30741,
+      "object_id": "1999-025ATB",
+      "name": "FENGYUN 1C DEB",
+      "epoch": "2026-09-01T11:39:21.610656",
+      "mean_motion_rev_day": 14.13372666,
+      "a_km": 7218.259214019136,
+      "e": 0.001247222183312534,
+      "inc_deg": 98.68126669781414,
+      "source_raan_deg": 250.8737,
+      "raan_deg": 251.33217684180315,
+      "source_argp_deg": 91.3756,
+      "argp_deg": 133.0725799149378,
+      "source_mean_anomaly_deg": 62.4478,
+      "mean_anomaly_deg": 288.6928278638273,
+      "reference_epoch": "2026-09-01T23:06:52.041312+00:00",
+      "epoch_age_days": 0.47743553999999994,
+      "perigee_km": 843.0,
+      "apogee_km": 853.0,
+      "period_min": 101.88395705114053,
+      "rcs_m2": 0.0069,
+      "rcs_equiv_d_cm": 9.373021315815206,
+      "state_r_teme_km": [
+        -2005.2527568730814,
+        -2941.395141088743,
+        6276.059404356876
+      ],
+      "state_v_teme_kms": [
+        1.5910337709922606,
+        6.371305794490691,
+        3.484281232902304
+      ]
+    },
+    {
+      "norad": 36668,
+      "object_id": "1999-025DYN",
+      "name": "FENGYUN 1C DEB",
+      "epoch": "2026-09-01T05:59:04.501824",
+      "mean_motion_rev_day": 14.15978103,
+      "a_km": 7217.073054052577,
+      "e": 0.005501255594063605,
+      "inc_deg": 98.60572370112212,
+      "source_raan_deg": 250.7126,
+      "raan_deg": 251.3970493764394,
+      "source_argp_deg": 191.5117,
+      "argp_deg": 176.41902990983576,
+      "source_mean_anomaly_deg": 168.4893,
+      "mean_anomaly_deg": 219.91301075818825,
+      "reference_epoch": "2026-09-01T23:06:52.041312+00:00",
+      "epoch_age_days": 0.71374467,
+      "perigee_km": 802.0,
+      "apogee_km": 876.0,
+      "period_min": 101.6964878870023,
+      "rcs_m2": 0.0106,
+      "rcs_equiv_d_cm": 11.617374563210367,
+      "state_r_teme_km": [
+        -2475.2738064836035,
+        -5359.033800028526,
+        4204.9619014992795
+      ],
+      "state_v_teme_kms": [
+        0.5443498836949188,
+        4.4208099856454295,
+        5.909723903803533
+      ]
+    }
+  ],
+  "legs": [
+    {
+      "plane_angle_deg": 0.143272270093578,
+      "dv_mps": 28.898093785027644,
+      "hohmann_tof_min": 50.79760393804869,
+      "from": 31150,
+      "to": 35175
+    },
+    {
+      "plane_angle_deg": 0.2888951158093138,
+      "dv_mps": 40.67426886145749,
+      "hohmann_tof_min": 50.68624237139171,
+      "from": 35175,
+      "to": 35089
+    },
+    {
+      "plane_angle_deg": 0.2712699280761978,
+      "dv_mps": 37.999296210077894,
+      "hohmann_tof_min": 50.80451660526611,
+      "from": 35089,
+      "to": 30741
+    },
+    {
+      "plane_angle_deg": 0.09909661003736388,
+      "dv_mps": 13.161223457974563,
+      "hohmann_tof_min": 50.85397651401619,
+      "from": 30741,
+      "to": 36668
+    }
+  ],
+  "route_transfer_dv_mps": 120.73288231453759,
+  "timed_route_minimum_dv": {
+    "route": [
+      36668,
+      30741,
+      35089,
+      35175,
+      31150
+    ],
+    "legs": [
+      {
+        "from": 36668,
+        "to": 30741,
+        "start_utc": "2026-09-03T23:06:52.041312+00:00",
+        "departure_utc": "2026-09-03T23:56:12.501628+00:00",
+        "arrival_orbit_utc": "2026-09-04T00:47:06.038358+00:00",
+        "rendezvous_utc": "2026-09-04T09:14:53.664606+00:00",
+        "node_wait_hours": 0.8223500877777778,
+        "hohmann_tof_min": 50.89227883762564,
+        "phase_angle_deg": 5.972426409253901,
+        "phase_direction": "lower",
+        "phase_orbits": 5,
+        "phase_duration_days": 0.35263456305968405,
+        "plane_angle_deg": 0.09053841331035588,
+        "geometry_dv_mps": 14.779449605951543,
+        "phasing_dv_mps": 16.482863794314184,
+        "leg_dv_mps": 31.262313400265725,
+        "leg_duration_days": 0.42224101034722217
+      },
+      {
+        "from": 30741,
+        "to": 35089,
+        "start_utc": "2026-09-06T09:14:53.664606+00:00",
+        "departure_utc": "2026-09-06T10:10:02.983991+00:00",
+        "arrival_orbit_utc": "2026-09-06T11:00:45.814226+00:00",
+        "rendezvous_utc": "2026-09-13T19:02:45.890139+00:00",
+        "node_wait_hours": 0.9192553847222221,
+        "hohmann_tof_min": 50.71383725174662,
+        "phase_angle_deg": 209.91041648222776,
+        "phase_direction": "upper",
+        "phase_orbits": 104,
+        "phase_duration_days": 7.33472310084171,
+        "plane_angle_deg": 0.2801163734393534,
+        "geometry_dv_mps": 43.67483035824786,
+        "phasing_dv_mps": 19.81755743748792,
+        "leg_dv_mps": 63.49238779573578,
+        "leg_duration_days": 7.408243351076388
+      },
+      {
+        "from": 35089,
+        "to": 35175,
+        "start_utc": "2026-09-15T19:02:45.890139+00:00",
+        "departure_utc": "2026-09-15T19:53:57.801587+00:00",
+        "arrival_orbit_utc": "2026-09-15T20:44:33.016270+00:00",
+        "rendezvous_utc": "2026-09-22T10:39:06.728681+00:00",
+        "node_wait_hours": 0.8533087355555555,
+        "hohmann_tof_min": 50.58691138228055,
+        "phase_angle_deg": 135.2589513635574,
+        "phase_direction": "lower",
+        "phase_orbits": 94,
+        "phase_duration_days": 6.57955685661405,
+        "plane_angle_deg": 0.2259007865646513,
+        "geometry_dv_mps": 29.939330736494004,
+        "phasing_dv_mps": 19.915117064382315,
+        "leg_dv_mps": 49.854447800876315,
+        "leg_duration_days": 6.650241186828704
+      },
+      {
+        "from": 35175,
+        "to": 31150,
+        "start_utc": "2026-09-24T10:39:06.728681+00:00",
+        "departure_utc": "2026-09-24T11:11:46.197343+00:00",
+        "arrival_orbit_utc": "2026-09-24T12:02:31.359735+00:00",
+        "rendezvous_utc": "2026-09-24T17:09:01.185471+00:00",
+        "node_wait_hours": 0.5442968505555555,
+        "hohmann_tof_min": 50.75270653731375,
+        "phase_angle_deg": 356.2703666036227,
+        "phase_direction": "upper",
+        "phase_orbits": 3,
+        "phase_duration_days": 0.2128452052770654,
+        "plane_angle_deg": 0.17218085694173113,
+        "geometry_dv_mps": 31.087786907763054,
+        "phasing_dv_mps": 17.044089703423637,
+        "leg_dv_mps": 48.13187661118669,
+        "leg_duration_days": 0.27076917581018517
+      }
+    ],
+    "inter_target_dv_mps": 192.74102560806452,
+    "inter_target_elapsed_days": 24.7514947240625,
+    "dwell_days_after_capture": 2.0,
+    "max_phase_burn_each_mps": 10.0
+  },
+  "timed_route_minimum_time": {
+    "route": [
+      31150,
+      35175,
+      30741,
+      35089,
+      36668
+    ],
+    "legs": [
+      {
+        "from": 31150,
+        "to": 35175,
+        "start_utc": "2026-09-03T23:06:52.041312+00:00",
+        "departure_utc": "2026-09-03T23:13:37.708829+00:00",
+        "arrival_orbit_utc": "2026-09-04T00:04:25.561077+00:00",
+        "rendezvous_utc": "2026-09-07T15:30:08.264309+00:00",
+        "node_wait_hours": 0.11268542138888889,
+        "hohmann_tof_min": 50.797537473586864,
+        "phase_angle_deg": 74.65691960821121,
+        "phase_direction": "lower",
+        "phase_orbits": 52,
+        "phase_duration_days": 3.642855361479126,
+        "plane_angle_deg": 0.14076402802291868,
+        "geometry_dv_mps": 27.38093593889354,
+        "phasing_dv_mps": 19.864862403126793,
+        "leg_dv_mps": 47.245798342020336,
+        "leg_duration_days": 3.68282665505787
+      },
+      {
+        "from": 35175,
+        "to": 30741,
+        "start_utc": "2026-09-09T15:30:08.264309+00:00",
+        "departure_utc": "2026-09-09T16:14:43.004408+00:00",
+        "arrival_orbit_utc": "2026-09-09T17:05:25.830838+00:00",
+        "rendezvous_utc": "2026-09-11T06:33:51.957215+00:00",
+        "node_wait_hours": 0.7429833608333334,
+        "hohmann_tof_min": 50.71377383542832,
+        "phase_angle_deg": 328.83900186204994,
+        "phase_direction": "upper",
+        "phase_orbits": 22,
+        "phase_duration_days": 1.5614134997314242,
+        "plane_angle_deg": 0.5198093450031238,
+        "geometry_dv_mps": 77.10391977697957,
+        "phasing_dv_mps": 19.410112596196072,
+        "leg_dv_mps": 96.51403237317564,
+        "leg_duration_days": 1.6275890382638891
+      },
+      {
+        "from": 30741,
+        "to": 35089,
+        "start_utc": "2026-09-13T06:33:51.957215+00:00",
+        "departure_utc": "2026-09-13T06:58:46.186162+00:00",
+        "arrival_orbit_utc": "2026-09-13T07:49:28.920746+00:00",
+        "rendezvous_utc": "2026-09-14T03:58:48.040465+00:00",
+        "node_wait_hours": 0.4150635963888889,
+        "hohmann_tof_min": 50.712243066418274,
+        "phase_angle_deg": 16.123737604555334,
+        "phase_direction": "lower",
+        "phase_orbits": 12,
+        "phase_duration_days": 0.8398046263785968,
+        "plane_angle_deg": 0.29909797460324106,
+        "geometry_dv_mps": 45.95321928247217,
+        "phasing_dv_mps": 18.59414052318442,
+        "leg_dv_mps": 64.54735980565658,
+        "leg_duration_days": 0.8923157783564815
+      },
+      {
+        "from": 35089,
+        "to": 36668,
+        "start_utc": "2026-09-16T03:58:48.040465+00:00",
+        "departure_utc": "2026-09-16T05:08:35.608300+00:00",
+        "arrival_orbit_utc": "2026-09-16T05:59:14.955535+00:00",
+        "rendezvous_utc": "2026-09-17T05:34:08.294587+00:00",
+        "node_wait_hours": 1.1632132874999999,
+        "hohmann_tof_min": 50.65578724496345,
+        "phase_angle_deg": 19.899361151856546,
+        "phase_direction": "lower",
+        "phase_orbits": 14,
+        "phase_duration_days": 0.9825617945798683,
+        "plane_angle_deg": 0.30588490169103183,
+        "geometry_dv_mps": 43.60523827473104,
+        "phasing_dv_mps": 19.654135240399384,
+        "leg_dv_mps": 63.25937351513043,
+        "leg_duration_days": 1.0662066449305556
+      }
+    ],
+    "inter_target_dv_mps": 271.566564035983,
+    "inter_target_elapsed_days": 17.268938116608798,
+    "dwell_days_after_capture": 2.0,
+    "max_phase_burn_each_mps": 10.0
+  },
+  "last_target_deorbit": {
+    "burn_mps": 202.15998306779514,
+    "coast_min": 47.132430311099746,
+    "burn_altitude_km": 865.9149589988374,
+    "target_perigee_km": 100.0
+  },
+  "mission_metrics": {
+    "planning_assumptions_not_catalog_data": {
+      "first_target_acquisition_days": 90.0,
+      "first_target_acquisition_dv_mps": 30.0,
+      "final_disposal_operations_days": 7.0,
+      "rpo_dv_per_target_mps": 5.0,
+      "delta_v_reserve_fraction": 0.2,
+      "per_target_conditional_success_q": 0.75,
+      "final_disposal_success_probability": 0.99
+    },
+    "total_mission_days": 121.7514947240625,
+    "nominal_targets": 5,
+    "nominal_rate_targets_per_year": 14.98954903293942,
+    "effective_targets_continue_after_safe_failure": 3.7125,
+    "effective_rate_continue_per_year": 11.12974015695752,
+    "effective_targets_abort_after_failure": 2.265205078125,
+    "effective_rate_abort_per_year": 6.790880517643612,
+    "delta_v_before_reserve_mps": 449.90100867585966,
+    "design_delta_v_with_20pct_reserve_mps": 539.8812104110316,
+    "sphere_proxy_mass_sensitivity": {
+      "1.4": {
+        "nominal_mass_kg": 3.6603628291346553,
+        "effective_mass_continue_kg": 2.7178194006324814,
+        "effective_mass_abort_kg": 1.8150929755677454
+      },
+      "2.8": {
+        "nominal_mass_kg": 7.3207256582693105,
+        "effective_mass_continue_kg": 5.435638801264963,
+        "effective_mass_abort_kg": 3.630185951135491
+      },
+      "7.9": {
+        "nominal_mass_kg": 20.65490453583127,
+        "effective_mass_continue_kg": 15.336266617854717,
+        "effective_mass_abort_kg": 10.24231036213228
+      }
+    },
+    "probability_sensitivity": {
+      "q=0.60,pdisp=0.90": {
+        "continue_after_safe_failure": 2.7,
+        "abort_after_failure": 1.245024
+      },
+      "q=0.60,pdisp=0.99": {
+        "continue_after_safe_failure": 2.9699999999999998,
+        "abort_after_failure": 1.3695263999999998
+      },
+      "q=0.75,pdisp=0.90": {
+        "continue_after_safe_failure": 3.375,
+        "abort_after_failure": 2.0592773437500003
+      },
+      "q=0.75,pdisp=0.99": {
+        "continue_after_safe_failure": 3.7125,
+        "abort_after_failure": 2.265205078125
+      },
+      "q=0.90,pdisp=0.90": {
+        "continue_after_safe_failure": 4.05,
+        "abort_after_failure": 3.3170310000000005
+      },
+      "q=0.90,pdisp=0.99": {
+        "continue_after_safe_failure": 4.455,
+        "abort_after_failure": 3.6487341000000004
+      }
+    },
+    "calendar_sensitivity": {
+      "mature_optimistic": {
+        "total_days": 57.751494724062496,
+        "nominal_rate_per_year": 31.600913685782114,
+        "effective_rate_q075_pdisp099_continue": 23.46367841169322,
+        "effective_rate_q075_pdisp099_abort": 14.316510030884691
+      },
+      "benchmark": {
+        "total_days": 121.7514947240625,
+        "nominal_rate_per_year": 14.98954903293942,
+        "effective_rate_q075_pdisp099_continue": 11.12974015695752,
+        "effective_rate_q075_pdisp099_abort": 6.790880517643612
+      },
+      "demonstration_conservative": {
+        "total_days": 218.7514947240625,
+        "nominal_rate_per_year": 8.3428001363012,
+        "effective_rate_q075_pdisp099_continue": 6.194529101203641,
+        "effective_rate_q075_pdisp099_abort": 3.7796306469062846
+      }
+    },
+    "phase_burn_sensitivity": {
+      "5.0": {
+        "route": [
+          36668,
+          30741,
+          35089,
+          35175,
+          31150
+        ],
+        "inter_target_dv_mps": 157.21785365659238,
+        "inter_target_elapsed_days": 58.49303460844908
+      },
+      "10.0": {
+        "route": [
+          36668,
+          30741,
+          35089,
+          35175,
+          31150
+        ],
+        "inter_target_dv_mps": 192.74102560806452,
+        "inter_target_elapsed_days": 24.7514947240625
+      },
+      "20.0": {
+        "route": [
+          36668,
+          30741,
+          35089,
+          35175,
+          31150
+        ],
+        "inter_target_dv_mps": 272.57059356677604,
+        "inter_target_elapsed_days": 20.079795359768518
+      }
+    }
+  }
+}

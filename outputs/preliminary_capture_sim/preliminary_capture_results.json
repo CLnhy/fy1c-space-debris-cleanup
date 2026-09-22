@@ -1,0 +1,312 @@
+{
+  "model": "rigid body + kinematic closing delay + simplified contact/retention limits",
+  "purpose": "concept screening only; not a qualified mission reliability prediction",
+  "random_seed": 20260903,
+  "trials_per_target": 200000,
+  "input_orbit_dataset": "public_debris_calculation/screening_result.json",
+  "assumption_classification": "All ASSUMPTIONS values are planning assumptions until replaced by hardware, navigation, and target-characterization test data.",
+  "assumptions": {
+    "capture_aperture_m": 0.3,
+    "radial_safety_margin_m": 0.015,
+    "position_error_sigma_m": 0.03,
+    "lateral_velocity_sigma_mps": 0.01,
+    "approach_speed_mean_mps": 0.05,
+    "approach_speed_sigma_mps": 0.012,
+    "approach_speed_min_mps": 0.015,
+    "approach_speed_max_mps": 0.1,
+    "closure_time_mean_s": 0.3,
+    "closure_time_sigma_s": 0.05,
+    "closure_time_clip_s": [
+      0.15,
+      0.45
+    ],
+    "physical_size_to_rcs_diameter_factor": [
+      0.85,
+      1.25
+    ],
+    "mass_log_uniform_kg": [
+      0.2,
+      1.5
+    ],
+    "tumble_rate_triangular_deg_s": [
+      0.0,
+      5.0,
+      20.0
+    ],
+    "coefficient_of_restitution_uniform": [
+      0.1,
+      0.4
+    ],
+    "friction_coefficient_uniform": [
+      0.25,
+      0.55
+    ],
+    "clamp_force_mean_N": 15.0,
+    "clamp_force_sigma_N": 2.0,
+    "max_contact_speed_mps": 0.12,
+    "max_impact_impulse_Ns": 0.18,
+    "max_surface_speed_mps": 0.025,
+    "max_absorbed_angular_momentum_Nms": 0.015
+  },
+  "success_definition": [
+    "aperture_intercept",
+    "approach_window",
+    "contact_speed",
+    "impact_impulse",
+    "tumble_surface_speed",
+    "friction_retention",
+    "angular_momentum"
+  ],
+  "targets": [
+    {
+      "norad": 36668,
+      "object_id": "1999-025DYN",
+      "rcs_equiv_d_cm": 11.617374563210367,
+      "trials": 200000,
+      "successes": 188672,
+      "success_probability": 0.94336,
+      "wilson_95_low": 0.9423384023770526,
+      "wilson_95_high": 0.9443645664582426,
+      "mean_physical_diameter_cm": 12.19729986194243,
+      "mean_radial_clearance_cm": 7.4013500690287835,
+      "marginal_failure_probability": {
+        "aperture_intercept": 0.054945,
+        "approach_window": 0.00178,
+        "contact_speed": 0.0,
+        "impact_impulse": 1e-05,
+        "tumble_surface_speed": 5e-06,
+        "friction_retention": 0.0,
+        "angular_momentum": 5e-06
+      },
+      "exclusive_primary_failure_probability": {
+        "aperture_intercept": 0.054945,
+        "approach_window": 0.001685,
+        "contact_speed": 0.0,
+        "impact_impulse": 5e-06,
+        "tumble_surface_speed": 5e-06,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      }
+    },
+    {
+      "norad": 30741,
+      "object_id": "1999-025ATB",
+      "rcs_equiv_d_cm": 9.373021315815206,
+      "trials": 200000,
+      "successes": 195750,
+      "success_probability": 0.97875,
+      "wilson_95_low": 0.9781086982165031,
+      "wilson_95_high": 0.9793729111526271,
+      "mean_physical_diameter_cm": 9.843040085589116,
+      "mean_radial_clearance_cm": 8.57847995720544,
+      "marginal_failure_probability": {
+        "aperture_intercept": 0.019545,
+        "approach_window": 0.001735,
+        "contact_speed": 0.0,
+        "impact_impulse": 1.5e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      },
+      "exclusive_primary_failure_probability": {
+        "aperture_intercept": 0.019545,
+        "approach_window": 0.001695,
+        "contact_speed": 0.0,
+        "impact_impulse": 1e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      }
+    },
+    {
+      "norad": 35089,
+      "object_id": "1999-025DJR",
+      "rcs_equiv_d_cm": 10.217907939900583,
+      "trials": 200000,
+      "successes": 193707,
+      "success_probability": 0.968535,
+      "wilson_95_low": 0.9677608792319075,
+      "wilson_95_high": 0.9692911225347045,
+      "mean_physical_diameter_cm": 10.729024112314194,
+      "mean_radial_clearance_cm": 8.135487943842902,
+      "marginal_failure_probability": {
+        "aperture_intercept": 0.02971,
+        "approach_window": 0.001795,
+        "contact_speed": 0.0,
+        "impact_impulse": 1e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      },
+      "exclusive_primary_failure_probability": {
+        "aperture_intercept": 0.02971,
+        "approach_window": 0.001745,
+        "contact_speed": 0.0,
+        "impact_impulse": 1e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      }
+    },
+    {
+      "norad": 35175,
+      "object_id": "1999-025DNF",
+      "rcs_equiv_d_cm": 8.444016491289505,
+      "trials": 200000,
+      "successes": 197320,
+      "success_probability": 0.9866,
+      "wilson_95_low": 0.9860866585218715,
+      "wilson_95_high": 0.9870946492985333,
+      "mean_physical_diameter_cm": 8.866151557020668,
+      "mean_radial_clearance_cm": 9.066924221489666,
+      "marginal_failure_probability": {
+        "aperture_intercept": 0.01172,
+        "approach_window": 0.001675,
+        "contact_speed": 0.0,
+        "impact_impulse": 1.5e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      },
+      "exclusive_primary_failure_probability": {
+        "aperture_intercept": 0.01172,
+        "approach_window": 0.001665,
+        "contact_speed": 0.0,
+        "impact_impulse": 1.5e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      }
+    },
+    {
+      "norad": 31150,
+      "object_id": "1999-025BHC",
+      "rcs_equiv_d_cm": 9.772050238058398,
+      "trials": 200000,
+      "successes": 194803,
+      "success_probability": 0.974015,
+      "wilson_95_low": 0.9733086109412341,
+      "wilson_95_high": 0.9747031803174775,
+      "mean_physical_diameter_cm": 10.257665518712678,
+      "mean_radial_clearance_cm": 8.371167240643661,
+      "marginal_failure_probability": {
+        "aperture_intercept": 0.024085,
+        "approach_window": 0.001925,
+        "contact_speed": 0.0,
+        "impact_impulse": 1.5e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      },
+      "exclusive_primary_failure_probability": {
+        "aperture_intercept": 0.024085,
+        "approach_window": 0.001885,
+        "contact_speed": 0.0,
+        "impact_impulse": 1.5e-05,
+        "tumble_surface_speed": 0.0,
+        "friction_retention": 0.0,
+        "angular_momentum": 0.0
+      }
+    }
+  ],
+  "mission_summary": {
+    "mean_single_target_success_probability": 0.970252,
+    "minimum_single_target_success_probability": 0.94336,
+    "maximum_single_target_success_probability": 0.9866,
+    "expected_successful_captures_if_all_five_attempted": 4.85126,
+    "probability_all_five_succeed_independent_attempts": 0.8593524278916916,
+    "probability_at_least_one_failure_independent_attempts": 0.14064757210830836
+  },
+  "sensitivity": [
+    {
+      "position_sigma_mm": 15,
+      "aperture_mm": 250,
+      "mean_single_target_success_probability": 0.995048,
+      "probability_all_five_succeed": 0.9754480531744768
+    },
+    {
+      "position_sigma_mm": 15,
+      "aperture_mm": 300,
+      "mean_single_target_success_probability": 0.998212,
+      "probability_all_five_succeed": 0.991091719517807
+    },
+    {
+      "position_sigma_mm": 15,
+      "aperture_mm": 350,
+      "mean_single_target_success_probability": 0.9982040000000001,
+      "probability_all_five_succeed": 0.9910521018477977
+    },
+    {
+      "position_sigma_mm": 25,
+      "aperture_mm": 250,
+      "mean_single_target_success_probability": 0.9141640000000001,
+      "probability_all_five_succeed": 0.6347976922817001
+    },
+    {
+      "position_sigma_mm": 25,
+      "aperture_mm": 300,
+      "mean_single_target_success_probability": 0.991,
+      "probability_all_five_succeed": 0.9557318503919318
+    },
+    {
+      "position_sigma_mm": 25,
+      "aperture_mm": 350,
+      "mean_single_target_success_probability": 0.998048,
+      "probability_all_five_succeed": 0.9902778622635624
+    },
+    {
+      "position_sigma_mm": 30,
+      "aperture_mm": 250,
+      "mean_single_target_success_probability": 0.8268000000000001,
+      "probability_all_five_succeed": 0.38113391856188555
+    },
+    {
+      "position_sigma_mm": 30,
+      "aperture_mm": 300,
+      "mean_single_target_success_probability": 0.9701280000000001,
+      "probability_all_five_succeed": 0.8587820913451234
+    },
+    {
+      "position_sigma_mm": 30,
+      "aperture_mm": 350,
+      "mean_single_target_success_probability": 0.995608,
+      "probability_all_five_succeed": 0.9782231390788438
+    },
+    {
+      "position_sigma_mm": 40,
+      "aperture_mm": 250,
+      "mean_single_target_success_probability": 0.642908,
+      "probability_all_five_succeed": 0.10649915870876107
+    },
+    {
+      "position_sigma_mm": 40,
+      "aperture_mm": 300,
+      "mean_single_target_success_probability": 0.8738279999999999,
+      "probability_all_five_succeed": 0.5072258102427378
+    },
+    {
+      "position_sigma_mm": 40,
+      "aperture_mm": 350,
+      "mean_single_target_success_probability": 0.9683759999999999,
+      "probability_all_five_succeed": 0.8512618653350429
+    },
+    {
+      "position_sigma_mm": 50,
+      "aperture_mm": 250,
+      "mean_single_target_success_probability": 0.48725199999999996,
+      "probability_all_five_succeed": 0.026194225434338712
+    },
+    {
+      "position_sigma_mm": 50,
+      "aperture_mm": 300,
+      "mean_single_target_success_probability": 0.741488,
+      "probability_all_five_succeed": 0.22184430159291568
+    },
+    {
+      "position_sigma_mm": 50,
+      "aperture_mm": 350,
+      "mean_single_target_success_probability": 0.895956,
+      "probability_all_five_succeed": 0.5762738402789269
+    }
+  ]
+}

@@ -1,0 +1,560 @@
+<div id="fy1c-orbit-viz">
+  <h2>五个风云一号 C 碎片目标轨道</h2>
+  <p class="text-small text-muted">共同历元：2026-09-01 23:06:52 UTC · TEME/SGP4 规划级轨道 · 清理顺序 1 → 5</p>
+
+  <div class="orbit-toolbar" aria-label="轨道图控制">
+    <div class="orbit-view-buttons" role="group" aria-label="视角">
+      <button type="button" class="btn btn-secondary" data-view="reset">三维</button>
+      <button type="button" class="btn btn-ghost" data-view="top">俯视</button>
+      <button type="button" class="btn btn-ghost" data-view="side">侧视</button>
+    </div>
+    <label class="text-small" for="fy1c-plane-scale">轨道面差显示</label>
+    <select id="fy1c-plane-scale" class="form-select" aria-label="轨道面差放大倍数">
+      <option value="1">×1 真实比例</option>
+      <option value="10" selected>×10 便于辨识</option>
+      <option value="30">×30 强化对比</option>
+    </select>
+  </div>
+
+  <div class="orbit-stage">
+    <canvas tabindex="0" aria-describedby="fy1c-orbit-help fy1c-orbit-detail">
+      五个风云一号 C 碎片目标的三维轨道示意图。
+    </canvas>
+  </div>
+
+  <p id="fy1c-orbit-help" class="text-small text-muted">拖动旋转 · 滚轮缩放 · 点击目标点或图例查看参数。默认仅放大轨道面差，轨道高度与偏心率保持原值。</p>
+
+  <div class="orbit-legend" aria-label="目标图例"></div>
+  <div id="fy1c-orbit-detail" class="card" aria-live="polite"></div>
+</div>
+
+<style>
+  #fy1c-orbit-viz {
+    color: var(--foreground);
+    width: 100%;
+  }
+
+  #fy1c-orbit-viz .orbit-toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-block: var(--spacing-md);
+  }
+
+  #fy1c-orbit-viz .orbit-view-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-inline-end: auto;
+  }
+
+  #fy1c-orbit-viz .form-select {
+    min-width: 10rem;
+    width: auto;
+  }
+
+  #fy1c-orbit-viz .orbit-stage {
+    position: relative;
+    width: 100%;
+  }
+
+  #fy1c-orbit-viz canvas {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--border);
+    display: block;
+    min-height: 22rem;
+    touch-action: none;
+    width: 100%;
+  }
+
+  #fy1c-orbit-viz .orbit-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs) var(--spacing-sm);
+    margin-block: var(--spacing-sm);
+  }
+
+  #fy1c-orbit-viz .orbit-legend button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--foreground);
+    cursor: pointer;
+    display: inline-flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+  }
+
+  #fy1c-orbit-viz .orbit-legend button[aria-pressed="true"] {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  #fy1c-orbit-viz .orbit-swatch {
+    border-radius: 50%;
+    display: inline-block;
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  #fy1c-orbit-viz #fy1c-orbit-detail {
+    margin-top: var(--spacing-sm);
+  }
+
+  @media (max-width: 480px) {
+    #fy1c-orbit-viz canvas {
+      aspect-ratio: 4 / 5;
+      min-height: 24rem;
+    }
+
+    #fy1c-orbit-viz .orbit-toolbar {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    #fy1c-orbit-viz .form-select {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('fy1c-orbit-viz');
+  if (!root) return;
+
+  const canvas = root.querySelector('canvas');
+  const context = canvas.getContext('2d');
+  const legend = root.querySelector('.orbit-legend');
+  const detail = root.querySelector('#fy1c-orbit-detail');
+  const scaleSelect = root.querySelector('#fy1c-plane-scale');
+  const colorProbe = document.createElement('span');
+  colorProbe.setAttribute('aria-hidden', 'true');
+  colorProbe.style.position = 'absolute';
+  colorProbe.style.visibility = 'hidden';
+  colorProbe.style.pointerEvents = 'none';
+  root.appendChild(colorProbe);
+  const earthRadius = 6378.137;
+  const degrees = Math.PI / 180;
+  const referencePlane = { inclination: 98.6192, raan: 251.0645 };
+
+  const targets = [
+    {
+      order: 1,
+      norad: '36668',
+      intl: '1999-025DYN',
+      name: 'FENGYUN 1C DEB',
+      orbit: '802 × 876 km',
+      diameter: '11.62 cm',
+      rcs: '0.0106 m²',
+      a: 7217.073054,
+      e: 0.00550125559,
+      inclination: 98.605723701,
+      raan: 251.397049376,
+      argp: 176.41902991,
+      meanAnomaly: 219.913010758,
+      series: '--viz-series-1'
+    },
+    {
+      order: 2,
+      norad: '30741',
+      intl: '1999-025ATB',
+      name: 'FENGYUN 1C DEB',
+      orbit: '843 × 853 km',
+      diameter: '9.37 cm',
+      rcs: '0.0069 m²',
+      a: 7218.259214,
+      e: 0.00124722218,
+      inclination: 98.681266698,
+      raan: 251.332176842,
+      argp: 133.072579915,
+      meanAnomaly: 288.692827864,
+      series: '--viz-series-2'
+    },
+    {
+      order: 3,
+      norad: '35089',
+      intl: '1999-025DJR',
+      name: 'FENGYUN 1C DEB',
+      orbit: '805 × 845 km',
+      diameter: '10.22 cm',
+      rcs: '0.0082 m²',
+      a: 7207.711793,
+      e: 0.00339890422,
+      inclination: 98.552714476,
+      raan: 251.090573656,
+      argp: 44.853094428,
+      meanAnomaly: 118.112303641,
+      series: '--viz-series-3'
+    },
+    {
+      order: 4,
+      norad: '35175',
+      intl: '1999-025DNF',
+      name: 'FENGYUN 1C DEB',
+      orbit: '779 × 860 km',
+      diameter: '8.44 cm',
+      rcs: '0.0056 m²',
+      a: 7195.861161,
+      e: 0.00442709090,
+      inclination: 98.573483256,
+      raan: 250.799177696,
+      argp: 235.395643203,
+      meanAnomaly: 346.973564917,
+      series: '--viz-series-4'
+    },
+    {
+      order: 5,
+      norad: '31150',
+      intl: '1999-025BHC',
+      name: 'FENGYUN 1C DEB',
+      orbit: '838 × 861 km',
+      diameter: '9.77 cm',
+      rcs: '0.0075 m²',
+      a: 7228.801246,
+      e: 0.00210971535,
+      inclination: 98.682806626,
+      raan: 250.705514522,
+      argp: 109.605731698,
+      meanAnomaly: 102.039830778,
+      series: '--viz-series-5'
+    }
+  ];
+
+  let view = { yaw: -0.58, pitch: 0.38, zoom: 1 };
+  let planeFactor = Number(scaleSelect.value);
+  let selected = 0;
+  let pointerState = null;
+  let projectedTargets = [];
+  let colors = {};
+
+  function cssColor(name) {
+    colorProbe.style.color = `var(${name}, var(--foreground))`;
+    return getComputedStyle(colorProbe).color;
+  }
+
+  function refreshColors() {
+    colors = {
+      foreground: cssColor('--foreground'),
+      background: cssColor('--background'),
+      muted: cssColor('--muted-foreground'),
+      border: cssColor('--border'),
+      earth: cssColor('--accent'),
+      series: targets.map((target) => cssColor(target.series))
+    };
+  }
+
+  function angleDifference(value, reference) {
+    return ((value - reference + 540) % 360) - 180;
+  }
+
+  function effectiveElements(target) {
+    return {
+      inclination: referencePlane.inclination + planeFactor * (target.inclination - referencePlane.inclination),
+      raan: referencePlane.raan + planeFactor * angleDifference(target.raan, referencePlane.raan)
+    };
+  }
+
+  function rotatePerifocal(target, trueAnomaly) {
+    const effective = effectiveElements(target);
+    const inclination = effective.inclination * degrees;
+    const raan = effective.raan * degrees;
+    const argp = target.argp * degrees;
+    const radius = target.a * (1 - target.e * target.e) / (1 + target.e * Math.cos(trueAnomaly));
+    const argument = argp + trueAnomaly;
+    const cosO = Math.cos(raan);
+    const sinO = Math.sin(raan);
+    const cosI = Math.cos(inclination);
+    const sinI = Math.sin(inclination);
+    const cosU = Math.cos(argument);
+    const sinU = Math.sin(argument);
+    return {
+      x: radius * (cosO * cosU - sinO * sinU * cosI),
+      y: radius * (sinO * cosU + cosO * sinU * cosI),
+      z: radius * sinU * sinI
+    };
+  }
+
+  function trueAnomalyFromMean(meanAnomaly, eccentricity) {
+    const mean = meanAnomaly * degrees;
+    let eccentric = mean;
+    for (let iteration = 0; iteration < 10; iteration += 1) {
+      eccentric -= (eccentric - eccentricity * Math.sin(eccentric) - mean) /
+        (1 - eccentricity * Math.cos(eccentric));
+    }
+    return 2 * Math.atan2(
+      Math.sqrt(1 + eccentricity) * Math.sin(eccentric / 2),
+      Math.sqrt(1 - eccentricity) * Math.cos(eccentric / 2)
+    );
+  }
+
+  function cameraRotate(point) {
+    const cy = Math.cos(view.yaw);
+    const sy = Math.sin(view.yaw);
+    const cp = Math.cos(view.pitch);
+    const sp = Math.sin(view.pitch);
+    const x1 = cy * point.x - sy * point.y;
+    const y1 = sy * point.x + cy * point.y;
+    return {
+      x: x1,
+      y: cp * y1 - sp * point.z,
+      z: sp * y1 + cp * point.z
+    };
+  }
+
+  function canvasMetrics() {
+    const rect = canvas.getBoundingClientRect();
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const width = Math.max(1, Math.round(rect.width * ratio));
+    const height = Math.max(1, Math.round(rect.height * ratio));
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width;
+      canvas.height = height;
+    }
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    return { width: rect.width, height: rect.height, ratio };
+  }
+
+  function drawSegmentLayer(points, color, scale, centerX, centerY, front) {
+    context.strokeStyle = color;
+    context.lineWidth = front ? 1.9 : 1.1;
+    context.globalAlpha = front ? 0.92 : 0.24;
+    for (let index = 0; index < points.length - 1; index += 1) {
+      const start = points[index];
+      const end = points[index + 1];
+      const isFront = (start.z + end.z) / 2 >= 0;
+      if (isFront !== front) continue;
+      context.beginPath();
+      context.moveTo(centerX + start.x * scale, centerY - start.y * scale);
+      context.lineTo(centerX + end.x * scale, centerY - end.y * scale);
+      context.stroke();
+    }
+    context.globalAlpha = 1;
+  }
+
+  function drawEarth(centerX, centerY, radiusPixels, scale) {
+    context.fillStyle = colors.earth;
+    context.strokeStyle = colors.border;
+    context.lineWidth = 1.2;
+    context.globalAlpha = 0.88;
+    context.beginPath();
+    context.arc(centerX, centerY, radiusPixels, 0, Math.PI * 2);
+    context.fill();
+    context.stroke();
+    context.globalAlpha = 1;
+
+    context.save();
+    context.beginPath();
+    context.arc(centerX, centerY, radiusPixels, 0, Math.PI * 2);
+    context.clip();
+    context.strokeStyle = colors.border;
+    context.lineWidth = 0.8;
+    context.globalAlpha = 0.65;
+    const circles = [
+      (angle) => ({ x: earthRadius * Math.cos(angle), y: earthRadius * Math.sin(angle), z: 0 }),
+      (angle) => ({ x: earthRadius * Math.cos(angle), y: 0, z: earthRadius * Math.sin(angle) }),
+      (angle) => ({ x: 0, y: earthRadius * Math.cos(angle), z: earthRadius * Math.sin(angle) })
+    ];
+    circles.forEach((circle) => {
+      context.beginPath();
+      for (let step = 0; step <= 120; step += 1) {
+        const point = cameraRotate(circle(step / 120 * Math.PI * 2));
+        const x = centerX + point.x * scale;
+        const y = centerY - point.y * scale;
+        if (step === 0) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      }
+      context.stroke();
+    });
+    context.restore();
+    context.globalAlpha = 1;
+  }
+
+  function drawAxes(width, height) {
+    const origin = { x: 38, y: height - 38 };
+    const length = Math.min(width, height) * 0.07;
+    const axes = [
+      { label: 'X', vector: { x: 1, y: 0, z: 0 } },
+      { label: 'Y', vector: { x: 0, y: 1, z: 0 } },
+      { label: 'Z', vector: { x: 0, y: 0, z: 1 } }
+    ];
+    context.strokeStyle = colors.muted;
+    context.fillStyle = colors.muted;
+    context.lineWidth = 1;
+    context.font = '11px system-ui, sans-serif';
+    axes.forEach((axis) => {
+      const direction = cameraRotate(axis.vector);
+      const endX = origin.x + direction.x * length;
+      const endY = origin.y - direction.y * length;
+      context.beginPath();
+      context.moveTo(origin.x, origin.y);
+      context.lineTo(endX, endY);
+      context.stroke();
+      context.fillText(axis.label, endX + 3, endY - 3);
+    });
+  }
+
+  function draw() {
+    const { width, height } = canvasMetrics();
+    context.clearRect(0, 0, width, height);
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const scale = Math.min(width, height) * 0.42 / 7300 * view.zoom;
+    const earthPixels = earthRadius * scale;
+
+    const orbitPoints = targets.map((target) => {
+      const points = [];
+      for (let step = 0; step <= 300; step += 1) {
+        points.push(cameraRotate(rotatePerifocal(target, step / 300 * Math.PI * 2)));
+      }
+      return points;
+    });
+
+    orbitPoints.forEach((points, index) => drawSegmentLayer(points, colors.series[index], scale, centerX, centerY, false));
+    drawEarth(centerX, centerY, earthPixels, scale);
+    orbitPoints.forEach((points, index) => drawSegmentLayer(points, colors.series[index], scale, centerX, centerY, true));
+
+    projectedTargets = targets.map((target, index) => {
+      const anomaly = trueAnomalyFromMean(target.meanAnomaly, target.e);
+      const rotated = cameraRotate(rotatePerifocal(target, anomaly));
+      const x = centerX + rotated.x * scale;
+      const y = centerY - rotated.y * scale;
+      const projectedRadius = Math.hypot(x - centerX, y - centerY);
+      const visible = rotated.z >= 0 || projectedRadius > earthPixels;
+      if (visible) {
+        context.fillStyle = colors.series[index];
+        context.strokeStyle = index === selected ? colors.foreground : colors.background;
+        context.lineWidth = index === selected ? 3 : 1.2;
+        context.beginPath();
+        context.arc(x, y, index === selected ? 6.5 : 5, 0, Math.PI * 2);
+        context.fill();
+        context.stroke();
+        context.fillStyle = colors.foreground;
+        context.font = index === selected ? '600 13px system-ui, sans-serif' : '12px system-ui, sans-serif';
+        context.fillText(String(target.order), x + 9, y - 8);
+      }
+      return { x, y, visible };
+    });
+
+    drawAxes(width, height);
+  }
+
+  function updateDetail() {
+    const target = targets[selected];
+    const factorText = planeFactor === 1 ? '真实轨道面差' : `轨道面差 ×${planeFactor} 显示`;
+    detail.textContent = `目标 ${target.order} · NORAD ${target.norad} · ${target.intl} · 轨道 ${target.orbit} · RCS 等效直径 ${target.diameter} · RCS ${target.rcs} · ${factorText}`;
+    legend.querySelectorAll('button').forEach((button, index) => {
+      button.setAttribute('aria-pressed', String(index === selected));
+    });
+  }
+
+  targets.forEach((target, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-pressed', String(index === selected));
+    button.setAttribute('aria-label', `选择目标 ${target.order}，NORAD ${target.norad}`);
+    const swatch = document.createElement('span');
+    swatch.className = 'orbit-swatch';
+    swatch.style.background = `var(${target.series})`;
+    swatch.setAttribute('aria-hidden', 'true');
+    const label = document.createElement('span');
+    label.textContent = `${target.order} · ${target.norad}`;
+    button.append(swatch, label);
+    button.addEventListener('click', () => {
+      selected = index;
+      updateDetail();
+      draw();
+    });
+    legend.appendChild(button);
+  });
+
+  root.querySelectorAll('[data-view]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const name = button.dataset.view;
+      if (name === 'top') view = { yaw: 0, pitch: 0, zoom: 1 };
+      else if (name === 'side') view = { yaw: -Math.PI / 2, pitch: Math.PI / 2, zoom: 1 };
+      else view = { yaw: -0.58, pitch: 0.38, zoom: 1 };
+      root.querySelectorAll('[data-view]').forEach((item) => {
+        item.classList.toggle('btn-secondary', item === button);
+        item.classList.toggle('btn-ghost', item !== button);
+      });
+      draw();
+    });
+  });
+
+  scaleSelect.addEventListener('change', () => {
+    planeFactor = Number(scaleSelect.value);
+    updateDetail();
+    draw();
+  });
+
+  canvas.addEventListener('pointerdown', (event) => {
+    pointerState = { id: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
+    canvas.setPointerCapture(event.pointerId);
+  });
+
+  canvas.addEventListener('pointermove', (event) => {
+    if (!pointerState || pointerState.id !== event.pointerId) return;
+    const deltaX = event.clientX - pointerState.x;
+    const deltaY = event.clientY - pointerState.y;
+    if (Math.abs(deltaX) + Math.abs(deltaY) > 2) pointerState.moved = true;
+    view.yaw += deltaX * 0.008;
+    view.pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, view.pitch + deltaY * 0.008));
+    pointerState.x = event.clientX;
+    pointerState.y = event.clientY;
+    draw();
+  });
+
+  canvas.addEventListener('pointerup', (event) => {
+    if (!pointerState || pointerState.id !== event.pointerId) return;
+    if (!pointerState.moved) {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      let best = { index: -1, distance: 18 };
+      projectedTargets.forEach((point, index) => {
+        if (!point.visible) return;
+        const distance = Math.hypot(point.x - x, point.y - y);
+        if (distance < best.distance) best = { index, distance };
+      });
+      if (best.index >= 0) {
+        selected = best.index;
+        updateDetail();
+        draw();
+      }
+    }
+    pointerState = null;
+    canvas.releasePointerCapture(event.pointerId);
+  });
+
+  canvas.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    view.zoom = Math.max(0.72, Math.min(2.2, view.zoom * Math.exp(-event.deltaY * 0.001)));
+    draw();
+  }, { passive: false });
+
+  canvas.addEventListener('keydown', (event) => {
+    const step = 0.08;
+    if (event.key === 'ArrowLeft') view.yaw -= step;
+    else if (event.key === 'ArrowRight') view.yaw += step;
+    else if (event.key === 'ArrowUp') view.pitch = Math.max(-Math.PI / 2, view.pitch - step);
+    else if (event.key === 'ArrowDown') view.pitch = Math.min(Math.PI / 2, view.pitch + step);
+    else return;
+    event.preventDefault();
+    draw();
+  });
+
+  const resizeObserver = new ResizeObserver(draw);
+  resizeObserver.observe(canvas);
+  const themeObserver = new MutationObserver(() => {
+    refreshColors();
+    draw();
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
+
+  refreshColors();
+  updateDetail();
+  draw();
+})();
+</script>
